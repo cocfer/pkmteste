@@ -1,0 +1,1 @@
+{"name":"pokemon-red-blue-coop","version":"1.0.0","description":"Batalhas Pokémon 1x1 e 2x2 cooperativo online contra Red e Blue","main":"server.js","scripts":{"start":"node server.js"},"engines":{"node":">=18"},"license":"UNLICENSED"}
