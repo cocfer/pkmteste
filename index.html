@@ -240,7 +240,11 @@ const SNOW={raf:0,f:[],x:null,c:null,w:0,h:0,t:0,img:null};
 function snowSize(){const A=$('#arena'),d=(typeof devicePixelRatio=='number'&&devicePixelRatio)||1;SNOW.w=(A&&A.clientWidth)||920;SNOW.h=(A&&A.clientHeight)||575;SNOW.c.width=SNOW.w*d;SNOW.c.height=SNOW.h*d;SNOW.x.setTransform(d,0,0,d,0,0)}
 function flake(top){const z=Math.random(),u=Math.max(.7,SNOW.w/920);return{x:Math.random()*SNOW.w,y:top?-20:Math.random()*SNOW.h,r:(6+z*9)*u,v:(20+z*38)*u,a:.5+z*.45,s:Math.random()*6.3,w:.4+Math.random()*.9,rot:Math.random()*6.3,vr:(Math.random()-.5)*1.6}}
 function drawFlake(X,f){X.save();X.translate(f.x,f.y);X.rotate(f.rot);X.globalAlpha=f.a;
- if(SNOW.img)X.drawImage(SNOW.img,-f.r,-f.r,f.r*2,f.r*2);
+ if(SNOW.img){
+ X.filter='grayscale(1) brightness(0) invert(1)';
+ X.drawImage(SNOW.img,-f.r,-f.r,f.r*2,f.r*2);
+ X.filter='none';
+}
  else{X.strokeStyle='#ffffff';X.lineWidth=Math.max(1,f.r/6);X.lineCap='round';X.beginPath();for(let k=0;k<6;k++){const a=k*Math.PI/3,c=Math.cos(a),s=Math.sin(a),bx=c*f.r*.55,by=s*f.r*.55;X.moveTo(0,0);X.lineTo(c*f.r,s*f.r);for(const d of[-.75,.75]){X.moveTo(bx,by);X.lineTo(bx+Math.cos(a+d)*f.r*.38,by+Math.sin(a+d)*f.r*.38)}}X.stroke()}
  X.restore()}
 function snowLoop(ts){if(!SNOW.raf)return;const dt=Math.min(.05,(ts-(SNOW.t||ts))/1000);SNOW.t=ts;const X=SNOW.x;X.clearRect(0,0,SNOW.w,SNOW.h);
