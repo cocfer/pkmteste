@@ -241,7 +241,7 @@ function snowSize(){const A=$('#arena'),d=(typeof devicePixelRatio=='number'&&de
 function flake(top){const z=Math.random(),u=Math.max(.7,SNOW.w/920);return{x:Math.random()*SNOW.w,y:top?-20:Math.random()*SNOW.h,r:(6+z*9)*u,v:(20+z*38)*u,a:.5+z*.45,s:Math.random()*6.3,w:.4+Math.random()*.9,rot:Math.random()*6.3,vr:(Math.random()-.5)*1.6}}
 function drawFlake(X,f){X.save();X.translate(f.x,f.y);X.rotate(f.rot);X.globalAlpha=f.a;
  if(SNOW.img)X.drawImage(SNOW.img,-f.r,-f.r,f.r*2,f.r*2);
- else{X.strokeStyle='#e8f6ff';X.lineWidth=Math.max(1,f.r/6);X.lineCap='round';X.beginPath();for(let k=0;k<6;k++){const a=k*Math.PI/3,c=Math.cos(a),s=Math.sin(a),bx=c*f.r*.55,by=s*f.r*.55;X.moveTo(0,0);X.lineTo(c*f.r,s*f.r);for(const d of[-.75,.75]){X.moveTo(bx,by);X.lineTo(bx+Math.cos(a+d)*f.r*.38,by+Math.sin(a+d)*f.r*.38)}}X.stroke()}
+ else{X.strokeStyle='#ffffff';X.lineWidth=Math.max(1,f.r/6);X.lineCap='round';X.beginPath();for(let k=0;k<6;k++){const a=k*Math.PI/3,c=Math.cos(a),s=Math.sin(a),bx=c*f.r*.55,by=s*f.r*.55;X.moveTo(0,0);X.lineTo(c*f.r,s*f.r);for(const d of[-.75,.75]){X.moveTo(bx,by);X.lineTo(bx+Math.cos(a+d)*f.r*.38,by+Math.sin(a+d)*f.r*.38)}}X.stroke()}
  X.restore()}
 function snowLoop(ts){if(!SNOW.raf)return;const dt=Math.min(.05,(ts-(SNOW.t||ts))/1000);SNOW.t=ts;const X=SNOW.x;X.clearRect(0,0,SNOW.w,SNOW.h);
  for(const f of SNOW.f){f.y+=f.v*dt;f.x+=Math.sin(ts/1300*f.w+f.s)*14*dt;f.rot+=f.vr*dt;if(f.y>SNOW.h+20)Object.assign(f,flake(true));if(f.x<-20)f.x=SNOW.w+20;else if(f.x>SNOW.w+20)f.x=-20;drawFlake(X,f)}
